@@ -20,13 +20,11 @@ const name = require("../package.json").name,
     author = require("../package.json").author,
     url = require("../package.json").repository.url;
 
-// ROUTES
 app.get("/", cors(corsOptions), (req, res) => {
     const mainpage = ({ name: `${name}`, version: `${version}`, author: `${author}`, repository_url: `${url}` })
     return res.send(mainpage)
 });
 
-// GET USER INFORMATION
 app.get("/discord/user/:userID", cors(corsOptions), (req, res) => {
     client.users.fetch(req.params.userID).then((user) => {
         const results = ({ username: `${user.username}`, Bot: `${user.bot}`, discriminator: `${user.discriminator}`, url: `${user.displayAvatarURL({ format: "png", size: 4096, dynamic: true })}` });
@@ -34,7 +32,6 @@ app.get("/discord/user/:userID", cors(corsOptions), (req, res) => {
     });
 });
 
-// GET GUILD INFORMATION
 app.get("/discord/guild/:guildID", cors(corsOptions), (req, res) => {
     client.guilds.fetch(req.params.guildID).then((guild) => {
         const results = ({ guildID: `${guild.id}`,
@@ -51,7 +48,7 @@ app.get("/discord/guild/:guildID", cors(corsOptions), (req, res) => {
 });
 
 app.use(function (req, res, next) {
-    res.status(404).send("Sorry, can't find that! the routes is :[/discord/user/:userId]")
+    res.status(404).send("Wrong route, use this: [/discord/user/:userId]")
 });
 
 // API START
