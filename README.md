@@ -1,1 +1,1 @@
-### Discord API by worst#1337
+### Discord API hosted in AWS
